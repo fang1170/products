@@ -1,15 +1,21 @@
 #讀取檔案
 products = []
-with open ('products.csv', 'r', encoding = 'utf-8') as f:
-	for line in f :
-		# s = line.strip().split(',')            #split會存成字串
-		# name = s[0]
-		# price = s[1]
-		if '商品, 價格' in line:                  # continue 跳過進到下一迴 跳過9、10行
-			continue
-		name, price = line.strip().split(',')     #上面三行的簡化寫法    
-		products.append([name, price])
-print(products)		
+import os
+if os.path.isfile('products.csv'):                 #檢查檔案在不在
+	print('找到檔案了!')
+	with open ('products.csv', 'r', encoding = 'utf-8') as f:
+		for line in f :
+			# s = line.strip().split(',')            #split會存成字串
+			# name = s[0]
+			# price = s[1]
+			if '商品, 價格' in line:                  # continue 跳過進到下一迴 跳過9、10行
+				continue
+			name, price = line.strip().split(',')     #上面三行的簡化寫法    
+			products.append([name, price])
+	#印出原先購買紀錄
+	print(products)
+else:
+	print('找不到檔案..')		
 #讓使用輸入
 while True:
 	name = input('商品名稱:')
@@ -21,7 +27,7 @@ while True:
 	# p.append(price)
 	# products.append(p)
 	products.append([name, price])         #簡化寫法
-#印出購買紀錄	
+#印出所有購買紀錄	
 print(products)	
 for p in products:
 	print(p[0], '的價格為:', p[1])
